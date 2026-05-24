@@ -67,10 +67,11 @@ namespace SmartBike.API.Servicios
         // En UsuarioServicio.cs (La implementación)
         public async Task<UsuarioResponseDto?> ValidarLoginAsync(string correo, string contrasena)
         {
+            // Prueba esto solo para descartar
             var usuario = await _context.Usuarios
-         .Include(u => u.TipoUsuario)
-         .FirstOrDefaultAsync(u => u.CorreoInstitucional.Trim() == correo.Trim()
-                                && u.Contrasena.Trim() == contrasena.Trim());
+            .Include(u => u.TipoUsuario)
+            .FirstOrDefaultAsync(u => u.CorreoInstitucional.Trim().ToLower() == correo.Trim().ToLower()
+                                   && u.Contrasena.Trim() == contrasena.Trim());
 
             if (usuario == null) return null;
 

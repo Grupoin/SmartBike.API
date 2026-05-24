@@ -6,6 +6,7 @@
         {
             InitializeComponent();
             Routing.RegisterRoute("RegistroPage", typeof(Views.RegistroPage));
+            Routing.RegisterRoute("DashboardPage", typeof(Views.DashboardPage));
         }
     }
 }

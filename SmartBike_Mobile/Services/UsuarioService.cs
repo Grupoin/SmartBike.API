@@ -1,6 +1,7 @@
 ﻿using SmartBike_Mobile.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
@@ -66,10 +67,13 @@ namespace SmartBike_Mobile.Services
         }
         public async Task<UsuarioResponse?> LoginAsync(string correo, string contrasena)
         {
-            var credenciales = new { CorreoInstitucional = correo, Contrasena = contrasena };
+            // Asegúrate de que el nombre de la propiedad coincida con el modelo del Backend
+            var credenciales = new { Correo = correo, Contrasena = contrasena };
+
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("http://192.168.0.103:5023/api/usuarios/login", credenciales);
+                // 1. CORRECCIÓN: Asegúrate que sea el endpoint correcto, ej: "login"
+                var response = await _httpClient.PostAsJsonAsync($"{BaseUrl}login", credenciales);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -77,16 +81,16 @@ namespace SmartBike_Mobile.Services
                 }
                 else
                 {
-                    // AQUÍ ESTÁ EL TRUCO:
+                    // 2. MEJORA: Lee el error del servidor para saber qué pasó
                     var errorContent = await response.Content.ReadAsStringAsync();
-                    System.Diagnostics.Debug.WriteLine($"ERROR DE API: {errorContent}"); // Mira esto en la salida de VS
+                    Debug.WriteLine($"ERROR API ({response.StatusCode}): {errorContent}");
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"EXCEPCIÓN: {ex.Message}"); // Mira esto
-                throw; // Deja que el error suba para saber qué está pasando
+                Debug.WriteLine($"EXCEPCIÓN DE RED: {ex.Message}");
+                throw; // Es correcto lanzar la excepción aquí si quieres que el ViewModel la maneje
             }
         }
 

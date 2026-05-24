@@ -65,7 +65,7 @@ namespace SmartBike_Mobile.ViewModels
                 {
                     MensajeError = string.Empty;
                     // Navegación exitosa
-                    await Shell.Current.GoToAsync("//DashboardPage");
+                    await Shell.Current.GoToAsync("DashboardPage");
                 }
                 else
                 {
@@ -75,8 +75,7 @@ namespace SmartBike_Mobile.ViewModels
             }
             catch (Exception ex)
             {
-                // 3. Captura de errores para depuración
-                MensajeError = "Error de conexión con el servidor.";
+                await Shell.Current.DisplayAlert("ERROR REAL", ex.Message, "OK");
             }
         }
 
