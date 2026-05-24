@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:SmartBike_Mobile.ViewModels"
+             x:Class="SmartBike_Mobile.Views.LoginPage"
+             Title="SmartBike - Acceso"
+             BackgroundColor="#F5F5F5">
+
+    <ContentPage.BindingContext>
+        <viewmodels:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
+            <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="20">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Correo Institucional" FontAttributes="Bold" TextColor="#34495E" />
+                    <Entry Text="{Binding Correo}" Placeholder="ejemplo@utn.edu.ec" TextColor="Black"/>
+
+                    <Label Text="Contraseña" FontAttributes="Bold" TextColor="#34495E" />
+                    <Entry Text="{Binding Contrasena}" IsPassword="True" Placeholder="******" TextColor="Black"/>
+
+                    <Label Text="{Binding MensajeError}" 
+                           TextColor="Red" 
+                           HorizontalOptions="Center" 
+                           FontSize="14" 
+                           FontAttributes="Italic"/>
+
+                    <Button Text="Ingresar" 
+                            Command="{Binding IniciandoSesionCommand}" 
+                            BackgroundColor="#2ECC71" 
+                            TextColor="White" 
+                            HeightRequest="50"/>
+
+                    <Button Text="¿No tienes cuenta? Regístrate aquí" 
+                            Command="{Binding IrARegistroCommand}" 
+                            BackgroundColor="Transparent" 
+                            TextColor="#3498DB"/>
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

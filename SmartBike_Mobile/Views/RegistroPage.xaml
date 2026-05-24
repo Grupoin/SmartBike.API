@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:SmartBike_Mobile.ViewModels"
+             x:Class="SmartBike_Mobile.Views.RegistroPage"
+             Title="Registro de Usuario"
+             BackgroundColor="#F5F5F5">
+
+    <ContentPage.BindingContext>
+        <viewmodels:RegistroViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="15">
+            <Button Text="← Volver al inicio" 
+                    Command="{Binding VolverLoginCommand}"
+                    BackgroundColor="Transparent" 
+                    TextColor="#7F8C8D" 
+                    HorizontalOptions="Start"
+                    FontSize="14"/>
+
+            <Label Text="Crear Cuenta Nueva" FontSize="24" FontAttributes="Bold" 
+                   TextColor="#2C3E50" HorizontalOptions="Center"/>
+
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="20" HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Número de Cédula" FontAttributes="Bold" TextColor="#34495E"/>
+                    <Entry Text="{Binding Cedula}" Keyboard="Numeric" MaxLength="10" TextColor="Black"/>
+
+                    <Label Text="Nombres" FontAttributes="Bold" TextColor="#34495E"/>
+                    <Entry Text="{Binding Nombres}" TextColor="Black"/>
+
+                    <Label Text="Apellidos" FontAttributes="Bold" TextColor="#34495E"/>
+                    <Entry Text="{Binding Apellidos}" TextColor="Black"/>
+
+                    <Label Text="Correo Institucional" FontAttributes="Bold" TextColor="#34495E"/>
+                    <Entry Text="{Binding Correo}" Keyboard="Email" TextColor="Black"/>
+
+                    <Label Text="Tipo de Usuario" FontAttributes="Bold" TextColor="#34495E"/>
+                    <Picker Title="Seleccione su tipo" 
+                            ItemsSource="{Binding TiposUsuario}" 
+                            ItemDisplayBinding="{Binding Detalle}" 
+                            SelectedItem="{Binding TipoUsuarioSeleccionado}"
+                            BackgroundColor="White"
+                            TextColor="Black"
+                            HeightRequest="50"/>
+
+                    <Label Text="Contraseña" FontAttributes="Bold" TextColor="#34495E"/>
+                    <Entry Text="{Binding Contrasena}" IsPassword="True" TextColor="Black"/>
+
+                    <Button Text="Registrarse" 
+                            Command="{Binding RegistrarUsuarioCommand}"
+                            BackgroundColor="#3498DB" 
+                            TextColor="White" 
+                            HeightRequest="50"
+                            FontAttributes="Bold"/>
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
