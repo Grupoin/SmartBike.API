@@ -15,11 +15,16 @@
             <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="20">
                 <VerticalStackLayout Spacing="15">
                     <Label Text="Correo Institucional" FontAttributes="Bold" TextColor="#34495E" />
-                    <Entry Text="{Binding Correo}" Placeholder="ejemplo@utn.edu.ec" TextColor="Black"/>
-
+                    <Entry Text="{Binding Correo}"
+       Placeholder="ejemplo@utn.edu.ec"
+       Keyboard="Email"
+       TextColor="Black"/>
                     <Label Text="Contraseña" FontAttributes="Bold" TextColor="#34495E" />
-                    <Entry Text="{Binding Contrasena}" IsPassword="True" Placeholder="******" TextColor="Black"/>
-
+                    <Entry Text="{Binding Contrasena}"
+       IsPassword="True"
+       Placeholder="******"
+       IsTextPredictionEnabled="False"
+       TextColor="Black"/>
                     <Label Text="{Binding MensajeError}" 
                            TextColor="Red" 
                            HorizontalOptions="Center" 

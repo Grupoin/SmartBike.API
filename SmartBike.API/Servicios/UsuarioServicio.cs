@@ -64,18 +64,20 @@ namespace SmartBike.API.Servicios
             };
         }
 
-        // En UsuarioServicio.cs (La implementación)
         public async Task<UsuarioResponseDto?> ValidarLoginAsync(string correo, string contrasena)
         {
-            // Prueba esto solo para descartar
+            correo = correo.Trim().ToLower();
+            contrasena = contrasena.Trim();
+
             var usuario = await _context.Usuarios
-            .Include(u => u.TipoUsuario)
-            .FirstOrDefaultAsync(u => u.CorreoInstitucional.Trim().ToLower() == correo.Trim().ToLower()
-                                   && u.Contrasena.Trim() == contrasena.Trim());
+                .Include(u => u.TipoUsuario)
+                .FirstOrDefaultAsync(u =>
+                    u.CorreoInstitucional.ToLower().Trim() == correo &&
+                    u.Contrasena.Trim() == contrasena);
 
-            if (usuario == null) return null;
+            if (usuario == null)
+                return null;
 
-            // Mapeo manual (Igual que en ObtenerPorCedulaAsync)
             return new UsuarioResponseDto
             {
                 Cedula = usuario.Cedula,

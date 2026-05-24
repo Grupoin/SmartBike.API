@@ -12,12 +12,12 @@ namespace SmartBike.Entidades
 
         [Required]
         [Column("nombres")]
-        [StringLength(10)]
+        [StringLength(100)]
         public string Nombres { get; set; } = string.Empty;
 
         [Required]
         [Column("apellidos")]
-        [StringLength(10)]
+        [StringLength(100)]
         public string Apellidos { get; set; } = string.Empty;
 
         [Required]
@@ -34,6 +34,8 @@ namespace SmartBike.Entidades
         [Column("id_tipo_usuario")]
         public int IdTipoUsuario { get; set; }
         [Required]
+        [Column("contrasena")]  
+        [StringLength(100)]
         public string Contrasena { get; set; } = string.Empty;
 
         [ForeignKey("IdTipoUsuario")]

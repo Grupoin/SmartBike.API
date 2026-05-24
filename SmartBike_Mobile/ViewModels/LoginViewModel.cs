@@ -59,8 +59,10 @@ namespace SmartBike_Mobile.ViewModels
             try
             {
                 // 2. Intento de login
-                var usuario = await _usuarioService.LoginAsync(Correo.Trim(), Contrasena.Trim());
-
+                var usuario = await _usuarioService.LoginAsync(
+                    Correo.Trim().ToLower(),
+                    Contrasena.Trim()
+                );
                 if (usuario != null)
                 {
                     MensajeError = string.Empty;
